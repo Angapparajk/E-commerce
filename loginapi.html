@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+     <div class="form-page" id="formPage">
+        <div class="forms">
+
+        <form id="loginForm">
+            <h5 class="text-center">LogIn Form</h5>
+            <label for="loginUsername">User Name</label><br>
+            <input type="text" placeholder="Enter Your User Name" id="loginUsername"><br>
+            <label for="loginPassword">Password</label><br>
+            <input type="password" placeholder="Enter Your Password" id="loginPassword"><br>
+            <div class="d-flex justify-content-center">
+                <button type = "submit" class="mt-2 btn btn-success">Log in</button>
+            </div>
+            <p class="mt-2">Don't have an account? <a href="regapi.html">Login</a></p>
+            <p id="loginMsg" class="text-center"></p>
+        </form>
+    </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
+<script>
+        let webPage = document.getElementById("webPage")
+        let formPage = document.getElementById("formPage")
+        let regFormEl = document.getElementById('registerForm')
+        let loginFormEl = document.getElementById("loginForm")
+        let regMsgEl = document.getElementById('regMsg')
+        let loginMsgEl = document.getElementById('loginMsg')
+
+        loginFormEl.addEventListener("submit", function(event){
+        event.preventDefault();
+
+        const userName = document.getElementById("loginUsername").value.trim()
+        const passWord = document.getElementById('loginPassword').value
+        const storedPassword = localStorage.getItem(userName)
+
+        if ( userName === ""  || passWord === "" ){
+            loginMsgEl.textContent = "Please Enter Your Credentials"
+            
+        }
+
+        else if (!storedPassword){
+            loginMsgEl.textContent = "User Not Found!"
+            
+        }
+        else if(storedPassword === passWord){
+            loginMsgEl.textContent = "Login Successful!"
+            setTimeout(function() {
+                window.location.href="taskapi.html"
+            }, 3000)  
+        }
+        else{
+            loginMsgEl.textContent = "Incorrect Credentials"
+        }
+        })
+</script>
+</body>
+</html>
